@@ -1,12 +1,93 @@
-
-/* 
-
-    You can write your own styles here...
-    
-    
-    ...Or you can use the import command to include 
-    other sylesheets into your bunde as well, e.j:
-    
-    import 'relative/path/to/stylesheet.scss';
-
-*/
+body {
+    background-color: #24292e;
+  }
+  
+  .wrapperContainer {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    border: 1px solid rgb(181, 180, 180);
+    border-radius: 2%;
+    margin-top: 50px;
+    margin-left: 40%;
+    margin-right: 40%;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-top: 50px;
+    color: rgb(181, 180, 180);
+    font-family: "Courier New", Courier, monospace;
+    margin-top: 5%;
+  }
+  
+  form {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .TodoBtn {
+    border: none;
+    cursor: pointer;
+    color: #24292e;
+    border-radius: 2%;
+    background-color: rgb(181, 180, 180);
+    font-family: "Courier New", Courier, monospace;
+    font-weight: bolder;
+  }
+  
+  .TodoInput {
+    background-color: #24292e;
+    border-radius: 2%;
+    border: 1px solid rgb(181, 180, 180);
+    color: rgb(181, 180, 180);
+    font-family: "Courier New", Courier, monospace;
+    font-size: 15px;
+  }
+  
+  textarea:focus, input:focus{
+    outline: none;
+  }
+  
+  .itemsText {
+    font-family: "Courier New", Courier, monospace;
+    color: rgb(181, 180, 180);
+    border: 1px solid rgb(181, 180, 180);
+    text-align: right;
+  }
+  
+  p {
+    text-align: left;
+  }
+  
+  .deleteIcon {
+    cursor: pointer;
+  }
+  
+  .isChecked {
+    text-decoration: line-through;
+    opacity: 0.5;
+  }
+  
+  .cleanBtn {
+    border: 1px solid;
+    cursor: pointer;
+    color: #24292e;
+    border-radius: 2%;
+    background-color: rgb(181, 180, 180);
+    font-family: "Courier New", Courier, monospace;
+    font-weight: bolder;
+    margin-top: 10px;
+    margin-left: 3.5px;
+    margin-right: 3.5px;
+    margin-bottom: 3.5px;
+  }
+  
+  .notify {
+    font-family: "Courier New", Courier, monospace;
+    color: rgb(181, 180, 180);
+    text-align: center;
+    margin-top: 20px;
+  }
+  
