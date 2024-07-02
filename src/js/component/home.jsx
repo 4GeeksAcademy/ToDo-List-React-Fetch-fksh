@@ -19,14 +19,10 @@ const Home = () => {
         return resp.json(); 
       })
       .then((data) => {
-        if (resp.status === 404) {
-          fetch("https://playground.4geeks.com/todo/users/frankspaceyhelder"); 
-        };
-        console.log(data); 
+        // console.log(data); 
       })
       .catch((error) => {
-        
-        console.error(error);
+        // console.error(error);
       });
   }
   
@@ -40,20 +36,18 @@ const Home = () => {
         return resp.json(); 
       })
       .then((data) => {
-        console.log(data.todos);
-        console.log(data); 
-        setToDoList(data.todos) 
+        // console.log(data.todos);
+        // console.log(data); 
+        setToDoList(data.todos); 
       })
       .catch((error) => {
-        console.error(error);
+        // console.error(error);
       });
   }
 
   useEffect(() => {
-    bringTasks()
-  }, [])
-
-
+    bringTasks();
+  }, []);
 
   const addTask = (taskName) => {
     const newTask = { label: taskName, is_done: false };
@@ -74,12 +68,9 @@ const Home = () => {
       setToDoList(prevState => [...prevState, addedTask]);
     })
     .catch((error) => {
-      console.error("Error adding task:", error);
+      // console.error("Error adding task:", error);
     });
   };
-
-
-
 
   function deleteTask(deleteTaskName) {
     const taskToDelete = toDoList.find((task) => task.taskName === deleteTaskName);
@@ -99,13 +90,13 @@ const Home = () => {
         }
       })
       .then(() => {
-        setToDoList(toDoList.filter((task) => task.taskName !== deleteTaskName));
+        setToDoList(prevState => prevState.filter((task) => task.taskName !== deleteTaskName));
       })
       .catch((error) => {
-        console.error(error);
+        // console.error(error);
       });
     } else {
-      console.error("Task not found");
+      // console.error("Task not found");
     }
   }
 
@@ -136,11 +127,10 @@ const Home = () => {
         setToDoList([]);
       })
       .catch((error) => {
-        console.error(error);
+        // console.error(error);
       });
   };
 
-  
   return (
     <div className="wrapperContainer">
       <Header />
