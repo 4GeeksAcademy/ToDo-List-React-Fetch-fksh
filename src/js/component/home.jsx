@@ -3,7 +3,6 @@ import { Header } from "./Header";
 import { TaskInput } from "./TaskInput";
 import { TaskItem } from "./TaskItem";
 
-//create your first component
 const Home = () => {
   const [toDoList, setToDoList] = useState([]);
 
@@ -15,16 +14,10 @@ const Home = () => {
         "Content-Type": "application/json",
       },
     })
-      .then((resp) => {
-        return resp.json(); 
-      })
-      .then((data) => {
-        // console.log(data); 
-      })
-      .catch((error) => {
-        // console.error(error);
-      });
-  }
+      .then((resp) => resp.json())
+      .then((data) => {})
+      .catch((error) => {});
+  };
   
   const bringTasks = () => {
     fetch("https://playground.4geeks.com/todo/users/frankspaceyhelder", {
@@ -32,18 +25,12 @@ const Home = () => {
         "Content-Type": "application/json",
       },
     })
-      .then((resp) => {
-        return resp.json(); 
-      })
+      .then((resp) => resp.json())
       .then((data) => {
-        // console.log(data.todos);
-        // console.log(data); 
-        setToDoList(data.todos); 
+        setToDoList(data.todos);
       })
-      .catch((error) => {
-        // console.error(error);
-      });
-  }
+      .catch((error) => {});
+  };
 
   useEffect(() => {
     bringTasks();
@@ -67,13 +54,11 @@ const Home = () => {
     .then((addedTask) => {
       setToDoList(prevState => [...prevState, addedTask]);
     })
-    .catch((error) => {
-      // console.error("Error adding task:", error);
-    });
+    .catch((error) => {});
   };
 
-  function deleteTask(deleteTaskName) {
-    const taskToDelete = toDoList.find((task) => task.taskName === deleteTaskName);
+  const deleteTask = (deleteTaskName) => {
+    const taskToDelete = toDoList.find((task) => task.label === deleteTaskName);
     if (taskToDelete) {
       fetch(`https://playground.4geeks.com/todo/todos/${taskToDelete.id}`, {
         method: "DELETE",
@@ -90,28 +75,24 @@ const Home = () => {
         }
       })
       .then(() => {
-        setToDoList(prevState => prevState.filter((task) => task.taskName !== deleteTaskName));
+        setToDoList(prevState => prevState.filter((task) => task.label !== deleteTaskName));
       })
-      .catch((error) => {
-        // console.error(error);
-      });
-    } else {
-      // console.error("Task not found");
+      .catch((error) => {});
     }
-  }
+  };
 
-  function toggleCheck(taskName) {
+  const toggleCheck = (taskName) => {
     setToDoList((prevToDoList) =>
       prevToDoList.map((task) =>
-        task.taskName === taskName
+        task.label === taskName
           ? {
               ...task,
-              checked: !task.checked,
+              is_done: !task.is_done,
             }
           : task
       )
     );
-  }
+  };
 
   const cleanAllTasks = () => {
     fetch("https://playground.4geeks.com/todo/users/frankspaceyhelder", {
@@ -126,9 +107,7 @@ const Home = () => {
         }
         setToDoList([]);
       })
-      .catch((error) => {
-        // console.error(error);
-      });
+      .catch((error) => {});
   };
 
   return (

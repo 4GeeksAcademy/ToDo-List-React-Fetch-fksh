@@ -7,13 +7,13 @@ export const TaskItem = ({ task, deleteTask, toggleCheck }) => {
       <div className="itemsText">
         <input
           type="checkbox"
-          checked={task.checked}
-          onChange={() => toggleCheck(task.taskName)}
+          checked={task.is_done}
+          onChange={() => toggleCheck(task.label)}
         />
-        <p className={task.checked ? "isChecked" : " "}>{task.label}</p>
+        <p className={task.is_done ? "isChecked" : ""}>{task.label}</p>
         <MdDeleteForever
           className="deleteIcon"
-          onClick={() => deleteTask(task.taskName)}
+          onClick={() => deleteTask(task.label)}
         />
       </div>
     </div>
