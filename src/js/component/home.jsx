@@ -9,15 +9,18 @@ const Home = () => {
   const createUser = () => {
     fetch("https://playground.4geeks.com/todo/users/frankspaceyhelder", {
       method: "POST",
-      body: JSON.stringify(),
-      headers: {
-        "Content-Type": "application/json",
-      },
     })
-      .then((resp) => resp.json())
-      .then((data) => {})
-      .catch((error) => {});
+      .then((resp) => {
+        if (!resp.ok) {
+          throw new Error("Network response was not ok");
+        }
+        bringTasks();
+      })
+      .catch((error) => {
+        console.error("Error creating user:", error);
+      });
   };
+  
   
   const bringTasks = () => {
     fetch("https://playground.4geeks.com/todo/users/frankspaceyhelder", {
@@ -25,11 +28,19 @@ const Home = () => {
         "Content-Type": "application/json",
       },
     })
-      .then((resp) => resp.json())
-      .then((data) => {
-        setToDoList(data.todos);
+      .then((resp) => {
+        if (resp.status == 404) {
+          createUser();
+        } else {
+          return resp.json();
+        }
       })
-      .catch((error) => {});
+      .then((data) => {
+        if (data != undefined) setToDoList(data.todos);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   useEffect(() => {
@@ -97,15 +108,13 @@ const Home = () => {
   const cleanAllTasks = () => {
     fetch("https://playground.4geeks.com/todo/users/frankspaceyhelder", {
       method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
     })
       .then((resp) => {
         if (!resp.ok) {
           throw new Error("Network response was not ok");
         }
         setToDoList([]);
+        createUser();
       })
       .catch((error) => {});
   };
